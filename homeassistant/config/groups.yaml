@@ -1,0 +1,63 @@
+default_view:
+  name: DEFAULT
+  view: yes
+  icon: mdi:home
+  entities:
+    - group.main_room
+    - group.bedroom
+    - group.av
+sesnsor_view:
+  name: sensor
+  view: yes
+  icon: mdi:pulse
+  entities:
+    - group.presence
+    - group.wunderground
+    - sun.sun
+#Groups
+av:
+  name: Media
+  entities:
+    - media_player.receiver
+    - media_player.tv
+main_room:
+  name: Main Room
+  entities:
+    - light.livingroom
+    - light.ceiling
+    - scene.movies
+    - scene.livingroombright
+bedroom: 
+  name: Bedroom
+  entities: 
+    - light.bedroom
+    - light.readinglight
+presence:
+  name: Presence
+  entities:
+    - device_tracker.tv
+    - device_tracker.laptopjavy
+    - device_tracker.javy
+    - device_tracker.marieke
+    - device_tracker.server
+    - device_tracker.receiver
+    - device_tracker.lightcontroller
+    - device_tracker.echodot
+wunderground:
+  name: Weather
+  entities:
+    - sensor.pws_alerts
+    - sensor.pws_feelslike_c
+    - sensor.pws_location
+    - sensor.pws_observation_time
+    - sensor.pws_precip_1hr_metric
+    - sensor.pws_precip_1hr_string
+    - sensor.pws_precip_today_metric
+    - sensor.pws_precip_today_string
+    - sensor.pws_relative_humidity
+    - sensor.pws_temp_c
+    - sensor.pws_visibility_km
+    - sensor.pws_weather
+    - sensor.pws_wind_dir
+    - sensor.pws_wind_kph
+    - sensor.pws_wind_string

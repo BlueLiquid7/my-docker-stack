@@ -1,0 +1,179 @@
+tv:
+  hide_if_away: false
+  icon: mdi:television-classic
+  mac: AC:9B:0A:11:F7:37
+  name: Sony TV
+  picture: 
+  track: true
+  vendor: Sony Corporation
+
+javy:
+  hide_if_away: false
+  icon: mdi:account
+  mac: B0:19:C6:E1:D8:3E
+  name: Javy
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+marieke:
+  hide_if_away: false
+  icon: mdi:account
+  mac: 2C:59:8A:5A:6A:3E
+  name: Marieke
+  picture:
+  track: true
+  vendor: LG Electronics (Mobile Communications)
+
+server:
+  hide_if_away: false
+  icon: mdi:server
+  mac: D0:50:99:A2:AE:DA
+  name: server
+  picture:
+  track: true
+  vendor: ASRock Incorporation
+
+receiver:
+  hide_if_away: false
+  icon: mdi:speaker
+  mac: 00:05:CD:3F:6D:19
+  name: Denon
+  picture:
+  track: true
+  vendor: D&M Holdings Inc.
+
+lightcontroller:
+  hide_if_away: false
+  icon: mdi:lightbulb
+  mac: F0:FE:6B:16:9B:FE
+  name: MiLight LedLight
+  picture:
+  track: true
+  vendor: Shanghai High-Flying Electronics Technology Co., Ltd
+
+echodot:
+  hide_if_away: false
+  icon: mdi:amazon
+  mac: 68:54:FD:4C:2D:2A
+  name: Amazon Echo Dot
+  picture: 
+  track: true
+  vendor: Amazon Technologies Inc.
+
+laptopmarieke:
+  hide_if_away: false
+  icon: mdi:laptop
+  mac: A0:C5:89:33:D2:E5
+  name: Laptop-Marieke
+  picture:
+  track: true
+  vendor: Intel Corporate
+
+ams2nbk158:
+  hide_if_away: false
+  icon:
+  mac: B8:08:CF:24:70:3E
+  name: AMS2-NBK-158
+  picture:
+  track: true
+  vendor: Intel Corporate
+
+iphone:
+  hide_if_away: false
+  icon:
+  mac: 1C:1A:C0:0C:13:A8
+  name: iPhone
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+iphonevnwietske:
+  hide_if_away: false
+  icon:
+  mac: D0:C5:F3:9A:9B:15
+  name: iPhonevnWietske
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+gainspand5d253:
+  hide_if_away: false
+  icon:
+  mac: 20:F8:5E:D5:D2:53
+  name: GainSpand5d253
+  picture:
+  track: true
+  vendor: Delta Electronics
+
+android150afd93dbd20860:
+  hide_if_away: false
+  icon:
+  mac: AC:D1:B8:7D:AC:73
+  name: android-150afd93dbd20860
+  picture:
+  track: true
+  vendor: Hon Hai Precision Ind. Co.,Ltd.
+
+ipad:
+  hide_if_away: false
+  icon:
+  mac: 78:7B:8A:74:26:2B
+  name: iPad
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+mbpvanwietske:
+  hide_if_away: false
+  icon:
+  mac: 78:4F:43:98:FD:DC
+  name: MBP-van-Wietske
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+iphonevanlilian:
+  hide_if_away: false
+  icon:
+  mac: F0:DB:E2:C9:DA:C4
+  name: iPhonevanLilian
+  picture:
+  track: true
+  vendor: unknown
+
+iphone2:
+  hide_if_away: false
+  icon:
+  mac: 60:F4:45:7D:78:18
+  name: iPhone-2
+  picture:
+  track: true
+  vendor: unknown
+
+android54cd79f67009d350:
+  hide_if_away: false
+  icon:
+  mac: 94:65:2D:D4:6A:62
+  name: android-54cd79f67009d350
+  picture:
+  track: true
+  vendor: unknown
+
+iphone_2:
+  hide_if_away: false
+  icon:
+  mac: B0:70:2D:B0:14:5A
+  name: iPhone
+  picture:
+  track: true
+  vendor: unknown
+
+b0059445cb87:
+  hide_if_away: false
+  icon:
+  mac: B0:05:94:45:CB:87
+  name: b0059445cb87
+  picture:
+  track: true
+  vendor: Liteon Technology Corporation

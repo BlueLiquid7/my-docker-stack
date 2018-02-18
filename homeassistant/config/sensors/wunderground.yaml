@@ -1,0 +1,13 @@
+platform: wunderground
+api_key: !secret wunderground_apikey
+monitored_conditions:
+  - alerts
+  - feelslike_c
+  - location
+  - observation_time
+  - precip_1hr_metric
+  - relative_humidity
+  - temp_c
+  - weather
+  - wind_dir
+  - wind_kph

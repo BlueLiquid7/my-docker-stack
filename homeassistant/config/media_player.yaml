@@ -1,0 +1,6 @@
+- platform: denonavr
+  host: 192.168.1.17
+  name: Receiver
+- platform: braviatv
+  host: 192.168.1.2
+  name: tv

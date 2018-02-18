@@ -1,0 +1,59 @@
+version: '3'
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer:latest
+    restart: unless-stopped
+    volumes:
+      - /srv/docker/portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - VIRTUAL_HOST=portainer.local
+
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: jwilder/nginx-proxy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  homeassistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:latest
+    restart: unless-stopped
+    ports: 
+      - "8123:8123"
+      - "8300:8300"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/srv/docker/my-docker-stack/homeassistant/config:/config"
+    environment:
+      - VIRTUAL_HOST=hass.local
+      - VIRTUAL_PORT=8123
+
+  rutorrent:
+    container_name: rutorrent
+    image: diameter/rtorrent-rutorrent:latest
+    restart: unless-stopped
+    ports: 
+      - "8080:8080" 
+      - "49160:49160/udp" 
+      - "49161:49161"
+    volumes: 
+     - /srv/docker/rutorrent/downloads:/downloads 
+    environment:
+      - VIRTUAL_HOST=rutorrent.local
+
+  nfs:
+    container_name: nfs
+    image: itsthenetwork/nfs-server-alpine:latest
+    ports:
+      - "2049:2049"
+    environment:
+      - SHARED_DIRECTORY=/downloads
+    volumes:
+      - /srv/docker/rutorrent/downloads:/downloads
+    privileged: true
