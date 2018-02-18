@@ -19,20 +19,20 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
-  homeassistant:
-    container_name: home-assistant
-    image: homeassistant/home-assistant:latest
-    restart: unless-stopped
-    ports: 
-      - "8123:8123"
-      - "8300:8300"
-    volumes:
-      - "/etc/localtime:/etc/localtime:ro"
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/srv/docker/my-docker-stack/homeassistant/config:/config"
-    environment:
-      - VIRTUAL_HOST=hass.local
-      - VIRTUAL_PORT=8123
+#  homeassistant:
+#    container_name: home-assistant
+#    image: homeassistant/home-assistant:latest
+#    restart: unless-stopped
+#    ports: 
+#      - "8123:8123"
+#      - "8300:8300"
+#    volumes:
+#      - "/etc/localtime:/etc/localtime:ro"
+#      - "/etc/timezone:/etc/timezone:ro"
+#      - "/srv/docker/my-docker-stack/homeassistant/config:/config"
+#    environment:
+#      - VIRTUAL_HOST=hass.local
+#      - VIRTUAL_PORT=8123
 
   rutorrent:
     container_name: rutorrent
@@ -41,7 +41,7 @@ services:
     ports: 
       - "8080:8080" 
       - "49160:49160/udp" 
-      - "49161:49161"
+      - "51413:51413"
     volumes: 
      - /srv/docker/rutorrent/downloads:/downloads 
     environment:
@@ -57,3 +57,35 @@ services:
     volumes:
       - /srv/docker/rutorrent/downloads:/downloads
     privileged: true
+
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/srv/docker/rutorrent/downloads/tv:/tv"
+      - "./sonarrconfig:/config"
+      - "/srv/docker/rutorrent/downloads:/downloads"
+    ports:
+      - "8989:8989"
+    environment:
+      - VIRTUAL_HOST=sonarr.local
+      - PUID=root 
+      - PGID=root
+
+  radarr:
+    image: linuxserver/radarr
+    restart: unless-stopped
+    expose:
+      - "7878"
+    ports:
+      - "7878:7878"
+    environment:
+      - VIRTUAL_HOST=radarr.local
+      - PUID=root
+      - PGID=root
+    volumes:
+      - /etc/localtime:/etc/localtime:ro    
+      - ./downloads:/mnt/downloads:rw
+      - ./radarrconfig:/config:rw
+      - ./movies:/movies:rw
