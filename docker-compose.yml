@@ -4,11 +4,13 @@ services:
     container_name: portainer
     image: portainer/portainer:latest
     restart: unless-stopped
-    volumes:
-      - /srv/docker/portainer:/data
-      - /var/run/docker.sock:/var/run/docker.sock
+    ports: 
+      - "9000:9000"
     environment:
       - VIRTUAL_HOST=portainer.local
+    volumes:
+      - ./portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
 
   nginx-proxy:
     container_name: nginx-proxy
@@ -26,13 +28,13 @@ services:
     ports: 
       - "8123:8123"
       - "8300:8300"
-    volumes:
-      - "/etc/localtime:/etc/localtime:ro"
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/srv/docker/my-docker-stack/homeassistant/config:/config"
     environment:
       - VIRTUAL_HOST=hass.local
       - VIRTUAL_PORT=8123
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - ./homeassistant/config:/config
 
   rutorrent:
     container_name: rutorrent
@@ -42,50 +44,109 @@ services:
       - "8080:8080" 
       - "49160:49160/udp" 
       - "51413:51413"
-    volumes: 
-     - /srv/docker/rutorrent/downloads:/downloads 
     environment:
       - VIRTUAL_HOST=rutorrent.local
+    volumes: 
+      - ./downloads:/downloads 
 
   nfs:
     container_name: nfs
     image: itsthenetwork/nfs-server-alpine:latest
+    restart: unless-stopped
     ports:
       - "2049:2049"
     environment:
       - SHARED_DIRECTORY=/downloads
     volumes:
-      - /srv/docker/rutorrent/downloads:/downloads
+      - ./downloads:/downloads
     privileged: true
 
   sonarr:
     container_name: sonarr
     image: linuxserver/sonarr
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./rutorrent/downloads/tv:/tv
-      - ./sonarrconfig:/config
-      - ./rutorrent/downloads:/downloads
+    restart: unless-stopped
     ports:
       - "8989:8989"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./downloads/tv:/tv
+      - ./sonarrconfig:/config
+      - ./downloads:/downloads
     environment:
       - VIRTUAL_HOST=sonarr.local
-      - PUID=root 
-      - PGID=root
+      - VIRTUAL_PORT=8989
 
   radarr:
+    container_name: radarr
     image: linuxserver/radarr
     restart: unless-stopped
-    expose:
-      - "7878"
     ports:
       - "7878:7878"
     environment:
       - VIRTUAL_HOST=radarr.local
-      - PUID=root
-      - PGID=root
     volumes:
-      - /etc/localtime:/etc/localtime:ro    
-      - ./downloads:/mnt/downloads:rw
+      - /etc/localtime:/etc/localtime:ro 
+      - ./downloads/movies:/movies
+      - ./downloads:/downloads
       - ./radarrconfig:/config:rw
-      - ./movies:/movies:rw
+
+  prometheus:
+    container_name: prometheus 
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    environment: 
+      - VIRTUAL_HOST=prometheus.local
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/etc/prometheus/tsdb'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    depends_on:
+      - exporter
+
+  exporter:
+    container_name: prometheus-exporter
+    image: prom/node-exporter:latest
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command: 
+      - '--path.procfs=/host/proc' 
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    environment: 
+      - VIRTUAL_HOST=exporter.local
+
+  cadvisor:
+    container_name: cadvisor
+    image: google/cadvisor:latest
+    restart: unless-stopped
+    ports:
+      - 8181:8080
+    environment: 
+      - VIRTUAL_HOST=cadvisor.local    
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment: 
+      - VIRTUAL_HOST=grafana.local      
+    depends_on:
+      - prometheus
