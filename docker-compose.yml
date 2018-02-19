@@ -108,8 +108,8 @@ services:
     depends_on:
       - exporter
 
-  exporter:
-    container_name: prometheus-exporter
+  node-exporter:
+    container_name: node-exporter
     image: prom/node-exporter:latest
     restart: unless-stopped
     ports:
