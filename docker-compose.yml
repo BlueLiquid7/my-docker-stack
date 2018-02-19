@@ -43,7 +43,7 @@ services:
     ports: 
       - "8080:8080" 
       - "49160:49160/udp" 
-      - "51413:51413"
+      - "49161:49161"
     environment:
       - VIRTUAL_HOST=rutorrent.local
     volumes: 

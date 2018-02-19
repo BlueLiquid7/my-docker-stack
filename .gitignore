@@ -4,6 +4,9 @@ secrets.yaml
 # Folders
 prometheus/tsdb/
 downloads/
+grafana/
+radarrconfig/
+sonarrconfig/
 
 # haconfig
 config/.HA_VERSION
