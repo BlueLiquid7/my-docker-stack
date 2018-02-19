@@ -19,20 +19,20 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
-#  homeassistant:
-#    container_name: home-assistant
-#    image: homeassistant/home-assistant:latest
-#    restart: unless-stopped
-#    ports: 
-#      - "8123:8123"
-#      - "8300:8300"
-#    volumes:
-#      - "/etc/localtime:/etc/localtime:ro"
-#      - "/etc/timezone:/etc/timezone:ro"
-#      - "/srv/docker/my-docker-stack/homeassistant/config:/config"
-#    environment:
-#      - VIRTUAL_HOST=hass.local
-#      - VIRTUAL_PORT=8123
+  homeassistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:latest
+    restart: unless-stopped
+    ports: 
+      - "8123:8123"
+      - "8300:8300"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/srv/docker/my-docker-stack/homeassistant/config:/config"
+    environment:
+      - VIRTUAL_HOST=hass.local
+      - VIRTUAL_PORT=8123
 
   rutorrent:
     container_name: rutorrent
@@ -62,10 +62,10 @@ services:
     container_name: sonarr
     image: linuxserver/sonarr
     volumes:
-      - "/etc/localtime:/etc/localtime:ro"
-      - "/srv/docker/rutorrent/downloads/tv:/tv"
-      - "./sonarrconfig:/config"
-      - "/srv/docker/rutorrent/downloads:/downloads"
+      - /etc/localtime:/etc/localtime:ro
+      - ./rutorrent/downloads/tv:/tv
+      - ./sonarrconfig:/config
+      - ./rutorrent/downloads:/downloads
     ports:
       - "8989:8989"
     environment:
