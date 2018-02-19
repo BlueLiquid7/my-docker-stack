@@ -1,18 +1,22 @@
 # Secrets
 secrets.yaml
+
+# Folders
+prometheus/tsdb/
+downloads/
+
+# haconfig
 config/.HA_VERSION
 config/.uuid
 
-# Logs and databases #
-######################
+# Logs and databases
 *.log
 *.sql
 *.sqlite
 *.db
 *.swp
 
-# OS generated files #
-######################
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
