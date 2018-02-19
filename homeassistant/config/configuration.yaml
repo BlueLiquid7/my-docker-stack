@@ -19,7 +19,7 @@ frontend:
 config:
 
 http:
-  api_password: !secret api_password
+  # api_password: !secret api_password
   server_port: 8123
   # Uncomment this if you are using SSL or running in Docker etc
   # base_url: example.duckdns.org:8123

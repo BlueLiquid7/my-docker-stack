@@ -67,8 +67,8 @@ pip install docker-compose
 ### Clone repo
 
 ```Bash
-mkdir /srv/docker
+git clone git@github.com:javydekoning/my-docker-stack.git /srv/docker
+mkdir /srv/docker/downloads && chmod -R a+rw /srv/docker/downloads/
+chmod -R a+rw /srv/docker/prometheus/
 cd /srv/docker
-mkdir /srv/docker/downloads
-chmod a+rw /srv/docker/downloads
 ```
