@@ -32,6 +32,23 @@ Uncomment `http://dl-4.alpinelinux.org/alpine/edge/community`
 vi /etc/apk/repositories
 ```
 
+### Install dependencies
+
+```Bash
+apk update
+apk add docker py-pip vim git curl
+rm -rf /etc/timezone
+echo "Europe/Amsterdam" >> /etc/timezone
+```
+
+### install docker & docker compose
+
+```Bash
+rc-update add docker boot
+service docker start
+pip install docker-compose
+```
+
 ### prep docker for Prometheus
 
 ```Bash
@@ -47,28 +64,24 @@ vi /etc/docker/daemon.json
 }
 ```
 
-### Install dependencies
-
-```Bash
-apk update
-apk add docker py-pip vim git
-rm -rf /etc/timezone
-echo "Europe/Amsterdam" >> /etc/timezone
-```
-
-### install docker & docker compose
-
-```Bash
-rc-update add docker boot
-service docker start
-pip install docker-compose
-```
-
 ### Clone repo
 
 ```Bash
 git clone git@github.com:javydekoning/my-docker-stack.git /srv/docker
 mkdir /srv/docker/downloads && chmod -R a+rw /srv/docker/downloads/
-chmod -R a+rw /srv/docker/prometheus/
-cd /srv/docker
 ```
+
+### add data disk
+
+Edit `/etc/fstab/` add this:
+
+```Bash
+/dev/sdb1       /srv/docker/downloads    ext4    defaults    0    1
+```
+
+Next mount disk:
+
+```Bash
+mount -a
+chmod -R a+rw /srv/docker/prometheus/
+````

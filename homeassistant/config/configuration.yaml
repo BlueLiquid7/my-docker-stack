@@ -44,6 +44,9 @@ discovery:
     - google_cast
     - denonavr
 
+# Prometheus
+prometheus:
+
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
