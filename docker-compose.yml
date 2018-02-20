@@ -69,7 +69,6 @@ services:
       - "8989:8989"
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./downloads/tv:/tv
       - ./sonarrconfig:/config
       - ./downloads:/downloads
     environment:
@@ -86,7 +85,6 @@ services:
       - VIRTUAL_HOST=radarr.local
     volumes:
       - /etc/localtime:/etc/localtime:ro 
-      - ./downloads/movies:/movies
       - ./downloads:/downloads
       - ./radarrconfig:/config:rw
 
