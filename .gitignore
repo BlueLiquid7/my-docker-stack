@@ -4,7 +4,8 @@ secrets.yaml
 # Folders
 prometheus/tsdb/
 downloads/
-grafana/
+grafana/plugins/
+grafana/sessions/
 radarrconfig/
 sonarrconfig/
 
