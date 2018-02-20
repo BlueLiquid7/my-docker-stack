@@ -51,14 +51,25 @@ services:
 
   nfs:
     container_name: nfs
-    image: itsthenetwork/nfs-server-alpine:latest
+    image: fuzzle/docker-nfs-server:latest
     restart: unless-stopped
     ports:
+      - "111:111"
+      - "111:111/udp"
       - "2049:2049"
+      - "2029:2049/udp"
+      - "32765:32765"
+      - "32765:32765/udp"
+      - "32766:32766"
+      - "32766:32766/udp"
+      - "32767:32767"
+      - "32767:32767/udp"
     environment:
-      - SHARED_DIRECTORY=/downloads
+      - 'NFS_EXPORT_DIR_1=/nfs'
+      - 'NFS_EXPORT_DOMAIN_1=*'
+      - 'NFS_EXPORT_OPTIONS_1=ro,insecure,no_subtree_check,no_root_squash,fsid=1'
     volumes:
-      - ./downloads:/downloads
+      - ./downloads:/nfs
     privileged: true
 
   sonarr:

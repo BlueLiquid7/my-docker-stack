@@ -2,6 +2,10 @@
 
 Install notes: git clone to /srv/docker/
 
+## Known issues
+
+NFS discovery will not work! Point Kodi to the absolute path: `nfs://<dockerhost ip>/nfs` (Server Address: <dockerhost ip>, Remote Path: nfs) 
+
 ## Prepping the Alpine Docker host
 
 First we install the server from vanilla ISO. 
